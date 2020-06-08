@@ -14,7 +14,7 @@ class CreateTodo extends React.Component {
       todoResponsibility: '',
       todoPriority: '',
       todoCompleted: false
-    }
+    };
   }
 
   setTodoTitle(e) {
@@ -48,15 +48,87 @@ class CreateTodo extends React.Component {
       todoResponsibility: '',
       todoPriority: '',
       todoCompleted: false
-    })
+    });
   }
 
   render() {
     return (
       <div className="App-container">
         <h3 className="App-title">Create New Todo</h3>
+
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label htmlFor="title" className="App-label">
+              Title:
+            </label>
+            <input
+              id="title"
+              type="text"
+              className="form-control"
+              value={this.state.todoTitle}
+              onChange={this.setTodoTitle}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="responsibility" className="App-label">
+              Responsibility:
+            </label>
+            <input
+              id="responsibility"
+              type="text"
+              className="form-control"
+              value={this.state.todoResponsibility}
+              onChange={this.setTodoResponsible}
+              autoComplete="off"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="priorityOptions"
+                id="priorityLow"
+                value="Low"
+                checked={this.state.todoPriority === "Low"}
+                onChange={this.setTodoPriority}
+              />
+              <label className="App-label" htmlFor="priorityLow">Low</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="priorityOptions"
+                id="priorityMedium"
+                value="Medium"
+                checked={this.state.todoPriority === "Medium"}
+                onChange={this.setTodoPriority}
+              />
+              <label className="App-label" htmlFor="priorityMedium">Medium</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="priorityOptions"
+                id="priorityHigh"
+                value="High"
+                checked={this.state.todoPriority === "High"}
+                onChange={this.setTodoPriority}
+              />
+              <label className="App-label" htmlFor="priorityHigh">High</label>
+            </div>
+          </div>
+          <div className="form-group">
+            <input type="submit" className="btn btn-info" value="Create New Todo" />
+          </div>
+        </form>
       </div>
-    )
+    );
   }
 }
 
