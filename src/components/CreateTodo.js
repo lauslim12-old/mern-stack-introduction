@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import { CREATEURL } from '../variables/Variables';
 
 class CreateTodo extends React.Component {
   constructor(props) {
@@ -42,6 +44,16 @@ class CreateTodo extends React.Component {
     console.log(`Todo Title: ${this.state.todoTitle}`);
     console.log(`Todo Responsibility: ${this.state.todoResponsibility}`);
     console.log(`Todo Priority: ${this.state.todoPriority}`);
+
+    const newTodo = {
+      todoTitle: this.state.todoTitle,
+      todoResponsibility: this.state.todoResponsibility,
+      todoPriority: this.state.todoPriority,
+      todoCompleted: this.state.todoCompleted
+    }
+
+    axios.post(CREATEURL, newTodo)
+      .then(res => console.log(res));    
 
     this.setState({
       todoTitle: '',
