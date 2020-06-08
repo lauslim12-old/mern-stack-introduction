@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.App-container {
+  padding: 2rem;
+  background-color: #282c34;
+}
+
 .App-logo {
   height: 5vmin;
   pointer-events: none;
@@ -26,6 +31,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.App-title {
+  color: #61dafb;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
