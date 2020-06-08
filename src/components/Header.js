@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
 
 import CreateTodo from './CreateTodo';
+import Backdrop from './Backdrop';
 
 class Header extends React.Component {
   render() {
@@ -25,6 +26,7 @@ class Header extends React.Component {
             </ul>
           </div>
         </nav>
+        <Route path="/" exact component={Backdrop} />
         <Route path="/create" component={CreateTodo} />
       </Router>
     )
