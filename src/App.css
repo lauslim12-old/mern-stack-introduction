@@ -1,3 +1,7 @@
+.Application {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +9,10 @@
 .App-container {
   padding: 2rem;
   background-color: #282c34;
+}
+
+.App-label {
+  color: #61dafb;
 }
 
 .App-logo {
