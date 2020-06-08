@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import logo from '../images/logo.svg';
 
+import CreateTodo from './CreateTodo';
+
 class Header extends React.Component {
   render() {
     return (
@@ -23,8 +25,6 @@ class Header extends React.Component {
             </ul>
           </div>
         </nav>
-        <Route path="/" exact component={TodosList} />
-        <Route path="/edit/:id" component={EditTodo} />
         <Route path="/create" component={CreateTodo} />
       </Router>
     )
