@@ -70,3 +70,25 @@ exports.updateTodo = (req, res) => {
     console.log("Something is wrong! Error code: ", err);
   });
 }
+
+exports.deleteTodo = (req, res) => {
+  let id = req.params.id;
+  Todo.destroy({
+    where: {
+      id: id,
+    }
+  }).then(status => {
+    if(status) {
+      res.json({
+        "status": "Data successfully deleted!",
+        "todoID": id
+      })
+    }
+    else {
+      res.status(400).send("Failed to get data to delete!");
+    }
+  })
+  .catch(err => {
+    console.log("Something is wrong! Error: ", err);
+  });
+}
