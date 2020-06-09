@@ -19,9 +19,11 @@
   "homepage": "https://github.com/lauslim12/mern-stack-introduction#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "helmet": "^3.22.0",
     "mariadb": "^2.4.0",
     "sequelize": "^5.21.12"
   },
