@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { READURL } from './../variables/Variables';
 
@@ -19,9 +19,6 @@ const Todo = (props) => (
     <td>
       <Link to={"/edit/" + props.todo.id}>
         <FontAwesomeIcon icon={faEdit} className="App-table-icon" />
-      </Link>
-      <Link to={"/delete/" + props.todo.id}>
-        <FontAwesomeIcon icon={faTrash} className="App-table-icon" />
       </Link>
     </td>
   </tr>

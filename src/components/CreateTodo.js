@@ -40,10 +40,12 @@ class CreateTodo extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
+    /*
     console.log("Form submitted: ");
     console.log(`Todo Title: ${this.state.todoTitle}`);
     console.log(`Todo Responsibility: ${this.state.todoResponsibility}`);
     console.log(`Todo Priority: ${this.state.todoPriority}`);
+    */
 
     const newTodo = {
       todoTitle: this.state.todoTitle,
@@ -53,7 +55,10 @@ class CreateTodo extends React.Component {
     }
 
     axios.post(CREATEURL, newTodo)
-      .then(res => console.log(res));    
+      .then(res => {
+        console.log(res);
+        this.props.history.push('/todos');
+      });    
 
     this.setState({
       todoTitle: '',
@@ -136,7 +141,7 @@ class CreateTodo extends React.Component {
             </div>
           </div>
           <div className="form-group">
-            <input type="submit" className="btn btn-info" value="Create New Todo" />
+            <input type="submit" className="btn btn-outline-info btn-lg btn-block" value="Create New Todo" />
           </div>
         </form>
       </div>

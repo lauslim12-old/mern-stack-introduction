@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { UPDATEURL, READURL } from '../variables/Variables';
+import { UPDATEURL, READURL, DELETEURL } from '../variables/Variables';
 
 class EditTodo extends React.Component {
   constructor(props) {
@@ -11,51 +11,53 @@ class EditTodo extends React.Component {
     this.setTodoResponsible = this.setTodoResponsible.bind(this);
     this.setTodoCompleted = this.setTodoCompleted.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.deleteData = this.deleteData.bind(this);
 
     this.state = {
-      todoTitle: '',
-      todoResponsibility: '',
-      todoPriority: '',
-      todoCompleted: false
+      todoTitle: "",
+      todoResponsibility: "",
+      todoPriority: "",
+      todoCompleted: false,
     };
   }
 
   componentDidMount() {
-    axios.get(READURL + '/' + this.props.match.params.id)
-      .then(res => {
+    axios
+      .get(READURL + "/" + this.props.match.params.id)
+      .then((res) => {
         this.setState({
           todoTitle: res.data.todoTitle,
           todoResponsibility: res.data.todoResponsibility,
           todoPriority: res.data.todoPriority,
-          todoCompleted: res.data.todoCompleted
+          todoCompleted: res.data.todoCompleted,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
   setTodoTitle(e) {
     this.setState({
-      todoTitle: e.target.value
+      todoTitle: e.target.value,
     });
   }
 
   setTodoResponsible(e) {
     this.setState({
-      todoResponsibility: e.target.value
+      todoResponsibility: e.target.value,
     });
   }
 
   setTodoPriority(e) {
     this.setState({
-      todoPriority: e.target.value
+      todoPriority: e.target.value,
     });
   }
 
   setTodoCompleted(e) {
     this.setState({
-      todoCompleted: !this.state.todoCompleted
+      todoCompleted: !this.state.todoCompleted,
     });
   }
 
@@ -73,14 +75,22 @@ class EditTodo extends React.Component {
       todoTitle: this.state.todoTitle,
       todoResponsibility: this.state.todoResponsibility,
       todoPriority: this.state.todoPriority,
-      todoCompleted: this.state.todoCompleted
-    }
+      todoCompleted: this.state.todoCompleted,
+    };
 
-    axios.put(UPDATEURL + '/' + this.props.match.params.id, updatedTodo)
-      .then(res => {
+    axios
+      .put(UPDATEURL + "/" + this.props.match.params.id, updatedTodo)
+      .then((res) => {
         //console.log(res);
-        this.props.history.push('/todos');
+        this.props.history.push("/todos");
       });
+  }
+
+  deleteData() {
+    axios.delete(DELETEURL + "/" + this.props.match.params.id).then((res) => {
+      console.log(res);
+      this.props.history.push("/todos");
+    });
   }
 
   render() {
@@ -128,7 +138,9 @@ class EditTodo extends React.Component {
                 checked={this.state.todoPriority === "Low"}
                 onChange={this.setTodoPriority}
               />
-              <label className="App-label" htmlFor="priorityLow">Low</label>
+              <label className="App-label" htmlFor="priorityLow">
+                Low
+              </label>
             </div>
             <div className="form-check form-check-inline">
               <input
@@ -140,7 +152,9 @@ class EditTodo extends React.Component {
                 checked={this.state.todoPriority === "Medium"}
                 onChange={this.setTodoPriority}
               />
-              <label className="App-label" htmlFor="priorityMedium">Medium</label>
+              <label className="App-label" htmlFor="priorityMedium">
+                Medium
+              </label>
             </div>
             <div className="form-check form-check-inline">
               <input
@@ -152,7 +166,9 @@ class EditTodo extends React.Component {
                 checked={this.state.todoPriority === "High"}
                 onChange={this.setTodoPriority}
               />
-              <label className="App-label" htmlFor="priorityHigh">High</label>
+              <label className="App-label" htmlFor="priorityHigh">
+                High
+              </label>
             </div>
             <div className="form-check">
               <input
@@ -164,17 +180,19 @@ class EditTodo extends React.Component {
                 checked={this.state.todoCompleted}
                 value={this.state.todoCompleted}
               />
-              <label className="App-label" htmlFor="completedCheckbox">Completed</label>
+              <label className="App-label" htmlFor="completedCheckbox">
+                Completed
+              </label>
             </div>
           </div>
           <div className="form-group">
-            <input type="submit" className="btn btn-info" value="Update Todo" />
+            <input type="submit" className="btn btn-outline-info btn-lg btn-block" value="Update Todo" />
+            <button className="btn btn-outline-warning btn-lg btn-block" onClick={this.deleteData}>Delete Todo</button>
           </div>
         </form>
       </div>
     );
   }
-
 }
 
 export default EditTodo;
