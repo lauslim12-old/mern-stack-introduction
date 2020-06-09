@@ -11,7 +11,7 @@ import EditTodo from './EditTodo';
 class Header extends React.Component {
   render() {
     return (
-      <Router>
+      <Router basename={process.env.REACT_APP_DIRECTORY}>
         <nav id="navigation" className="navbar navbar-toggleable-xl navbar-expand navbar-dark bg-dark">
           <img src={logo} className="App-logo" alt="logo" />
           <div className="collapse navbar-collapse" id="navbarNav">
