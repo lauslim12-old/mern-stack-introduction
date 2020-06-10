@@ -60,20 +60,22 @@ class TodosList extends React.Component {
       <div className="App-container">
         <h3 className="App-title">Todo List</h3>
 
-        <table className="table table-dark table-striped mt-3 text-center">
-          <thead>
-            <tr>
-              <td>Status</td>
-              <td>Title</td>
-              <td>Responsibility</td>
-              <td>Priority</td>
-              <td>Action</td>
-            </tr>
-          </thead>
-          <tbody>
-            { this.todoTable() }
-          </tbody>
-        </table>
+        <div className="table-responsive">
+          <table className="table table-dark table-striped mt-3 text-center">
+            <thead>
+              <tr>
+                <td>Status</td>
+                <td>Title</td>
+                <td>Responsibility</td>
+                <td>Priority</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              { this.todoTable() }
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
