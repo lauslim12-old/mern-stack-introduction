@@ -37,3 +37,11 @@ This is an introduction to MERN Stack for people who are unfamiliar with the con
 * Change the `backend/.env.example` variables to any of your webserver setup. Then, rename it to `.env`.
 * Finally, use `npm install` to install all the required dependencies.
 * Profit!
+
+## Deployment Notes
+If you want to deploy this to your web server, you have to do the following:
+* In the `package.json` file, add a key-value pair named `homepage: your-homepage-site`.
+* Change the `.env.development` file variables. The ones that you have to change are the `REACT_APP_DIRECTORY`, which is the folder where the application is located. If this application is hosted in root, then leave at it is (/), else change it to your subfolder, aka `/react-app-test`. After it is done, then rename to `.env`.
+* In the `src/components/Header.js`, I have already placed the `BrowserRouter` basename to be taking from the `.env` file. There is no need to manipulate anything, unless you want to change the settings.
+* After that, run this command: `npm run build`.
+* When the build process is done, you can copy the `build` folder to your webserver, whether it is `htdocs`, your `public_html`, your subdomain, or you can even create your own server-side setup with Express.js.
