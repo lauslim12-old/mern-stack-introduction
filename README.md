@@ -31,6 +31,12 @@ This is an introduction to MERN Stack for people who are unfamiliar with the con
 * Update a Todo
 * Delete a Todo
 
+## Project Structure
+* The application was bootstrapped with React.js CRA, and the structure follows it.
+* In the `src` folder, there are `components`, `images`, and `variables`. Variables are used to store global variable declarations. Components to store the parts of the UI. Images folder is quite self explanatory.
+* The `backend` folder contains MVC architecture that I use in JavaScript and Express.
+* There is a simplified differences between ES6 and ES5 JavaScript at the `.changesES6.js` file. Feel free to take a look at it. It's not essential to the application development, so just delete it if you feel like it.
+
 ## Installations and Usage
 * First, do `git clone repo` to fetch it to your local machine.
 * Use your command line to `cd repo-path`. Make sure to open two command lines, one for the front-end, and one for the back-end.
