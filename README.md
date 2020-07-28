@@ -25,7 +25,6 @@ This is an introduction to MERN Stack for people who are unfamiliar with the con
 ## Dependencies
 
 - Axios
-- Body Parser
 - Bootstrap
 - CORS
 - Dotenv
@@ -54,7 +53,9 @@ This is an introduction to MERN Stack for people who are unfamiliar with the con
 - First, do `git clone repo` to fetch it to your local machine.
 - Use your command line to `cd repo-path`. Make sure to open two command lines, one for the front-end, and one for the back-end.
 - Change the `backend/.env.example` variables to any of your webserver setup. Then, rename it to `.env`. If you have used the initial settings for the backend settings, you should be able to use this application without changing the variables. You just need to rename it to `.env`.
+- Create a new database in your web server. Change the variable in the `DB_NAME` to represent your new database. Leave the tables empty.
 - Finally, use `npm install` in the root folder, and also do that command in the `backend` folder to install all the required dependencies.
+- Run `npm run dev` in the `backend` folder in order to start the application in the development mode.
 - Profit!
 
 ## Deployment Notes
