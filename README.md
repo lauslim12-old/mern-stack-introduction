@@ -1,6 +1,6 @@
 # MERN Stack Architecture
 
-Repository for my tutorial on how to set up your first MERN Stack architecture. The written tutorial is still in progress by me!
+Repository for my tutorial on how to set up your first MERN Stack architecture. This repository is still under updating as of 20/09/2020.
 
 ## TODO
 
