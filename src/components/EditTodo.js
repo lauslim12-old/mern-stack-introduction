@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { UPDATEURL, READURL, DELETEURL } from '../variables/Variables';
+import { ENDPOINTURL } from '../variables/Variables';
 
 class EditTodo extends React.Component {
   constructor(props) {
@@ -23,13 +23,13 @@ class EditTodo extends React.Component {
 
   componentDidMount() {
     axios
-      .get(READURL + "/" + this.props.match.params.id)
+      .get(ENDPOINTURL + "/" + this.props.match.params.id)
       .then((res) => {
         this.setState({
-          todoTitle: res.data.todoTitle,
-          todoResponsibility: res.data.todoResponsibility,
-          todoPriority: res.data.todoPriority,
-          todoCompleted: res.data.todoCompleted,
+          todoTitle: res.data.data.todo.todoTitle,
+          todoResponsibility: res.data.data.todo.todoResponsibility,
+          todoPriority: res.data.data.todo.todoPriority,
+          todoCompleted: res.data.data.todo.todoCompleted,
         });
       })
       .catch((err) => {
@@ -79,7 +79,7 @@ class EditTodo extends React.Component {
     };
 
     axios
-      .put(UPDATEURL + "/" + this.props.match.params.id, updatedTodo)
+      .put(ENDPOINTURL + "/" + this.props.match.params.id, updatedTodo)
       .then((res) => {
         //console.log(res);
         this.props.history.push("/todos");
@@ -87,7 +87,7 @@ class EditTodo extends React.Component {
   }
 
   deleteData() {
-    axios.delete(DELETEURL + "/" + this.props.match.params.id).then((res) => {
+    axios.delete(ENDPOINTURL + "/" + this.props.match.params.id).then((res) => {
       console.log(res);
       this.props.history.push("/todos");
     });

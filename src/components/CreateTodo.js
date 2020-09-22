@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { CREATEURL } from '../variables/Variables';
+import { ENDPOINTURL } from '../variables/Variables';
 
 class CreateTodo extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class CreateTodo extends React.Component {
       todoCompleted: this.state.todoCompleted
     }
 
-    axios.post(CREATEURL, newTodo)
+    axios.post(ENDPOINTURL, newTodo)
       .then(res => {
         console.log(res);
         this.props.history.push('/todos');

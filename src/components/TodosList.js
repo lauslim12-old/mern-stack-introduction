@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { READURL } from './../variables/Variables';
+import { ENDPOINTURL } from './../variables/Variables';
 
 const Todo = (props) => (
   <tr>
@@ -33,12 +33,11 @@ class TodosList extends React.Component {
   }
 
   fetchData() {
-    axios.get(READURL)
+    axios.get(ENDPOINTURL)
       .then(res => {
         this.setState({
-          todos: res.data
+          todos: res.data.data.todos,
         });
-        //console.log(res.data);
       })
       .catch(err => {
         console.log(err);
