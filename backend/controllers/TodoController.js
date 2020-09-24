@@ -1,94 +1,115 @@
 const Database = require('./../configurations/Database');
 const db = new Database();
 const sequelize = db.connection;
-const Todo = sequelize.import("../models/Todo");
+const Todo = sequelize.import('../models/Todo');
 
-exports.getAllTodos = (req, res) => {
-  Todo.findAll().then(todos => {
-    res.json(todos);
-  });
-}
+exports.getAllTodos = async (req, res) => {
+  try {
+    const todos = await Todo.findAll();
 
-exports.getTodo = (req, res) => {
-  let id = req.params.id;
-  Todo.findOne({
-    where: {
-      id: id,
-    }
-  }).then(todos => {
-    res.json(todos);
-  });
-}
-
-exports.addTodo = (req, res) => {
-  let todo = new Todo(req.body);
-  Todo.create({
-    todoTitle: todo.todoTitle,
-    todoResponsibility: todo.todoResponsibility,
-    todoPriority: todo.todoPriority
-  }).then(todos => {
-    res.json({
-      "status": "Successfully created!",
-      "message": "New todo created!",
-      "data": todos
+    res.status(200).json({
+      status: 'success',
+      data: {
+        todos,
+      },
     });
-  });
-}
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      err,
+      message: 'Something is wrong! Please try again later!',
+    });
+  }
+};
 
-exports.updateTodo = (req, res) => {
-  let todo = new Todo(req.body);
-  let id = req.params.id;
-  Todo.findOne({
-    where: {
-      id: id,
-    }
-  }).then(status => {
-    if(status === null) {
-      res.status(400).send("Failed to fetch the data to update!");
-    }
-    else {
-      Todo.update({
-        todoTitle: todo.todoTitle,
-        todoResponsibility: todo.todoResponsibility,
-        todoPriority: todo.todoPriority,
-        todoCompleted: todo.todoCompleted
+exports.getTodo = async (req, res) => {
+  try {
+    const todo = await Todo.findOne({ where: { id: req.params.id } });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        todo,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      err,
+      message: 'Something is wrong! Please try again later!',
+    });
+  }
+};
+
+exports.addTodo = async (req, res) => {
+  try {
+    const newTodo = new Todo(req.body);
+
+    await Todo.create({
+      todoTitle: newTodo.todoTitle,
+      todoResponsibility: newTodo.todoResponsibility,
+      todoPriority: newTodo.todoPriority,
+    });
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        todo: newTodo,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      err,
+      message: 'Something is wrong! Please try again later!',
+    });
+  }
+};
+
+exports.updateTodo = async (req, res) => {
+  try {
+    const updateTodo = new Todo(req.body);
+
+    await Todo.update(
+      {
+        todoTitle: updateTodo.todoTitle,
+        todoResponsibility: updateTodo.todoResponsibility,
+        todoPriority: updateTodo.todoPriority,
+        todoCompleted: updateTodo.todoCompleted,
       },
       {
-        where: {
-          id: req.params.id,
-        }
-      })
-      .then(todos => {
-        res.json({
-          "status": "Data successfully updated!",
-          "data": todos
-        });
-      });
-    }
-  })
-  .catch(err => {
-    console.log("Something is wrong! Error code: ", err);
-  });
-}
+        where: { id: req.params.id },
+      }
+    );
 
-exports.deleteTodo = (req, res) => {
-  let id = req.params.id;
-  Todo.destroy({
-    where: {
-      id: id,
-    }
-  }).then(status => {
-    if(status) {
-      res.json({
-        "status": "Data successfully deleted!",
-        "todoID": id
-      })
-    }
-    else {
-      res.status(400).send("Failed to get data to delete!");
-    }
-  })
-  .catch(err => {
-    console.log("Something is wrong! Error: ", err);
-  });
-}
+    res.status(200).json({
+      status: 'success',
+      data: {
+        todo: updateTodo,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      err,
+      message: 'Something is wrong! Please try again later!',
+    });
+  }
+};
+
+exports.deleteTodo = async (req, res) => {
+  try {
+    await Todo.destroy({ where: { id: req.params.id } });
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      err,
+      message: 'Something is wrong! Please try again later!',
+    });
+  }
+};
