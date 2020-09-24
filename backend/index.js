@@ -1,26 +1,32 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+// Third party imports.
 const compression = require('compression');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const express = require('express');
 const helmet = require('helmet');
-const Database = require('./configurations/Database');
-const PORT = 8000;
 
+// Personal imports.
+const Database = require('./configurations/Database');
 const todoRoutes = require('./routes/apiRoutes');
 
-// Global Middlewares
+// Configure Dotenv
+dotenv.config({ path: '.env' });
+
+// Application Setup
 const app = express();
+
+// Database Synchronization
 const db = new Database();
 db.authenticate();
 db.synchronizeDatabase();
 
-// Setting
+// Middleware Stack
+app.use(express.json({ limit: '5kb' }));
 app.use(cors());
-app.use(bodyParser.json());
-app.use(compression());
 app.use(helmet());
+app.use(compression());
 app.use('/todos', todoRoutes);
 
-app.listen(PORT, function() {
-  console.log("Server is running on port: " + PORT);
+app.listen(process.env.PORT, function () {
+  console.log('Server is running on port: ' + process.env.PORT);
 });
