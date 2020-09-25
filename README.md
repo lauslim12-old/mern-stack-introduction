@@ -1,11 +1,6 @@
 # MERN Stack Architecture
 
-Repository for my tutorial on how to set up your first MERN Stack architecture. This repository is still under updating as of 20/09/2020.
-
-## TODO
-
-- Async/Await in the back-end.
-- Fix the routing.
+Repository for my tutorial on how to set up your first MERN Stack architecture, complete with modern JavaScript trends (MVC, async/await, and modular code).
 
 ## Architecture and Philosophies
 
